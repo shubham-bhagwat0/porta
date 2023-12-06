@@ -9,7 +9,7 @@ declare -a packages=(instantclient-sdk instantclient-odbc)
 
 function install_pkg {
   local package="$1"
-  local zip="${package}-${oracle_version}.zip"
+  local zip="${package}-linux.${oracle_version}.zip"
   local file="vendor/oracle/${zip}"
 
   if [ -f "${file}" ]; then
@@ -24,7 +24,6 @@ function install_pkg {
   unzip -o "${file}" -d /opt/oracle
   rm -rf "${file}"
 }
-
 
 for package in "${packages[@]}"; do
   install_pkg "$package"
@@ -45,3 +44,7 @@ rm -rf /opt/system/vendor/oracle
 ln -sf /opt/oracle/instantclient_19_3/libsqora.so.19.1 /opt/oracle/instantclient_19_3/libsqora.so
 ln -sf /opt/oracle/instantclient_19_3 /opt/oracle/instantclient
 cp config/oracle/*.ini /etc/
+
+#REFERENCE
+#https://download.oracle.com/otn_software/linux/instantclient/193/instantclient-sdk-linux.leppc64.c64-19.3.0.0.0dbru.zip
+#https://download.oracle.com/otn_software/linux/instantclient/193/instantclient-basic-linux.leppc64.c64-19.3.0.0.0dbru.zip
